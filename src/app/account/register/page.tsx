@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -46,12 +46,18 @@ export default function RegisterPage() {
   const router = useRouter();
 
   // Store
-  const { register } = useAuthStore();
+  const { register, isAuthenticated } = useAuthStore();
   const { cartId } = useCartStore();
   const { checkout, updateBuyerIdentity } = useCheckout();
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/");
+    }
+  }, [isAuthenticated, router]);
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -114,15 +120,17 @@ export default function RegisterPage() {
 
         const today = new Date().toISOString().split("T")[0];
 
-        await checkout({
+        const response = await checkout({
           phone: savedData?.phone || "08123456789",
           deliveryDate: savedData?.deliveryDate || today,
           deliveryTime: savedData?.deliveryTime || "10AM - 12PM",
         });
 
-        localStorage.removeItem("pendingCheckout");
-        localStorage.removeItem("checkoutFormData");
-        router.push("/");
+        if (response) {
+          localStorage.removeItem("pendingCheckout");
+          localStorage.removeItem("checkoutFormData");
+          router.replace("/checkout/success");
+        }
       } else {
         router.push("/");
       }
@@ -181,7 +189,7 @@ export default function RegisterPage() {
                       <FormControl>
                         <Input placeholder="Enter email" {...field} />
                       </FormControl>
-                      <FormMessage className="text-base" />
+                      <FormMessage className="text-xs" />
                     </FormItem>
                   )}
                 />
@@ -197,7 +205,7 @@ export default function RegisterPage() {
                         <FormControl>
                           <Input
                             type={showPassword ? "text" : "password"}
-                            placeholder="Enter Password"
+                            placeholder="Enter password"
                             className="pr-8"
                             {...field}
                           />
@@ -234,7 +242,7 @@ export default function RegisterPage() {
                           <div
                             key={req.id}
                             className={cn(
-                              "flex items-center gap-1 text-[9px] transition-colors duration-200",
+                              "flex items-center gap-1 text-xs transition-colors duration-200",
                               req.isValid
                                 ? "text-primary font-medium"
                                 : "text-gray-400"
@@ -249,7 +257,7 @@ export default function RegisterPage() {
                           </div>
                         ))}
                       </div>
-                      <FormMessage className="text-base" />
+                      <FormMessage className="text-xs" />
                     </FormItem>
                   )}
                 />
@@ -265,7 +273,7 @@ export default function RegisterPage() {
                         <FormControl>
                           <Input placeholder="First Name" {...field} />
                         </FormControl>
-                        <FormMessage className="text-base" />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
@@ -278,7 +286,7 @@ export default function RegisterPage() {
                         <FormControl>
                           <Input placeholder="Last Name" {...field} />
                         </FormControl>
-                        <FormMessage className="text-base" />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
@@ -315,15 +323,15 @@ export default function RegisterPage() {
                 </Button>
 
                 <div className="text-center mt-4">
-                  <p className="font-sans text-base">
+                  <p className="font-sans text-sm">
                     By signing up, you agree to our{" "}
-                    <div className="cursor-pointer font-bold hover:text-primary">
+                    <span className="cursor-pointer font-bold hover:text-primary">
                       Terms
-                    </div>{" "}
+                    </span>{" "}
                     and{" "}
-                    <div className="cursor-pointer font-bold hover:text-primary">
+                    <span className="cursor-pointer font-bold hover:text-primary">
                       Privacy Policy
-                    </div>
+                    </span>
                   </p>
                 </div>
               </form>

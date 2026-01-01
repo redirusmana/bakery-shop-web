@@ -47,16 +47,20 @@ export const useCheckout = () => {
       }
       return res.data;
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       queryClient.removeQueries({ queryKey: ["cart", cartId] });
       clearCart();
       closeCart();
-      toast.success("Checkout & Order placed successfully", {
-        description: "Thank you for your order.",
+      toast.success("Order placed successfully", {
+        description: "Thank you for your order",
       });
+
+      return response.success;
     },
     onError: (error: Error | AxiosError) => {
-      toast.error(error.message || "Something went wrong with checkout. Please try again");
+      toast.error(
+        error.message || "Something went wrong with checkout. Please try again"
+      );
     },
   });
 

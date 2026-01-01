@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -37,12 +37,18 @@ export default function LoginPage() {
   const router = useRouter();
 
   // Stores
-  const { login } = useAuthStore();
+  const { login, isAuthenticated } = useAuthStore();
   const { cartId } = useCartStore();
   const { checkout, updateBuyerIdentity } = useCheckout();
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/");
+    }
+  }, [isAuthenticated, router]);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -73,15 +79,17 @@ export default function LoginPage() {
 
         const today = new Date().toISOString().split("T")[0];
 
-        await checkout({
+        const response = await checkout({
           phone: savedData?.phone || "08123456789",
           deliveryDate: savedData?.deliveryDate || today,
           deliveryTime: savedData?.deliveryTime || "10AM - 12PM",
         });
 
-        localStorage.removeItem("pendingCheckout");
-        localStorage.removeItem("checkoutFormData");
-        router.push("/");
+        if (response) {
+          localStorage.removeItem("pendingCheckout");
+          localStorage.removeItem("checkoutFormData");
+          router.replace("/checkout/success");
+        }
       } else {
         router.push("/");
       }
@@ -140,7 +148,7 @@ export default function LoginPage() {
                       <FormControl>
                         <Input placeholder="Enter email" {...field} />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-xs" />
                     </FormItem>
                   )}
                 />
@@ -173,7 +181,7 @@ export default function LoginPage() {
                           )}
                         </button>
                       </div>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-xs" />
                       <div className="text-right pt-2">
                         <div className="cursor-pointer text-[9px] font-bold uppercase text-primary hover:text-foreground underline-offset-4 hover:underline transition-colors">
                           Forgot Password

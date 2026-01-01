@@ -44,13 +44,13 @@ export default function UserNav() {
         align="end"
         className="w-56 bg-white rounded-none border-gray-200 mt-2"
       >
-        <DropdownMenuLabel className="font-sans font-normal">
+        <DropdownMenuLabel className="font-sans font-semibold text-sm">
           Hi, {user.firstName} {user.lastName}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={handleLogout}
-          className="font-sans text-[10px] font-bold uppercase  text-destructive cursor-pointer"
+          className="font-sans text-[10px] font-bold uppercase text-sm text-destructive cursor-pointer"
         >
           Logout
         </DropdownMenuItem>

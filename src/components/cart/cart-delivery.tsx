@@ -89,6 +89,8 @@ export const CartDelivery = ({ onBack }: CartDeliveryProps) => {
           deliveryTime: time,
           phone: phone,
         });
+
+        router.replace("/checkout/success");
       } catch (error) {
         console.error(error);
       }
@@ -133,7 +135,7 @@ export const CartDelivery = ({ onBack }: CartDeliveryProps) => {
                     variant={"outline"}
                     className={cn(
                       INPUT_STYLE,
-                      "w-full justify-between text-left font-normal border-gray-300 hover:bg-transparent",
+                      "w-full justify-between text-left font-normal border-gray-300 hover:bg-transparent"
                     )}
                   >
                     {date ? format(date, "PPP") : <span>Pick a date</span>}

@@ -22,7 +22,7 @@ export const ProductList = ({
 
   return (
     <section className="py-12 md:py-24 bg-white">
-      <div className="container px-4 md:px-6 lg:px-8 mx-auto">
+      <div className="px-6 md:px-8 lg:px-10 mx-auto">
         {/* HEADER */}
         <div className="flex items-end justify-between mb-10 border-b border-gray-100 pb-4">
           <div>

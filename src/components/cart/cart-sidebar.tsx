@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { useCartStore } from "@/stores/use-cart-store";
 import { useCartQuery } from "@/hooks/cart/use-cart-query";
@@ -67,6 +68,7 @@ const getItemMetadata = (item: CartLine): string => {
 };
 
 export const CartSidebar = () => {
+  const router = useRouter();
   const { isCartOpen, closeCart } = useCartStore();
   const { data: cart, isLoading } = useCartQuery();
   const { removeItem } = useCartMutations();
@@ -117,7 +119,10 @@ export const CartSidebar = () => {
               </span>
               <Button
                 variant="link"
-                onClick={handleClose}
+                onClick={() => {
+                  router.push("/shop");
+                  handleClose();
+                }}
                 className="uppercase underline-offset-4"
               >
                 Continue Shopping

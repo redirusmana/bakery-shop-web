@@ -8,7 +8,7 @@ export const revalidate = 60;
 
 export default function ShopPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white mt-10">
       <Navbar variant="solid" />
 
       <div className="mx-auto px-6 py-12 md:px-12 md:py-16">

@@ -18,7 +18,7 @@ interface PageProps {
 export const revalidate = 60;
 
 const ProductBreadcrumb = ({ title }: { title?: string }) => (
-  <div className="bg-secondary py-3 text-white mt-2">
+  <div className="bg-secondary py-3 text-white mt-16">
     <div className=" mx-auto px-4 md:px-12">
       <nav className="flex items-center gap-2 text-xs font-bold uppercase ">
         <Link
@@ -79,7 +79,7 @@ export default async function ProductDetailPage({
   const { handle } = await params;
 
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen pt-2">
       <Navbar variant="solid" />
 
       <Suspense
