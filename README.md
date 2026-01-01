@@ -90,7 +90,7 @@ src/
 │   └── ui/              # Reusable UI components
 ├── hooks/               # Custom hooks
 ├── lib/                 # Utilities, api instance, formatters
-├── stores/              # Zustand stores)
+├── stores/              # Zustand stores
 └── types/               # TypeScript interfaces
 
 ```
