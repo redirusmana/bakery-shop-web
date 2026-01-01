@@ -84,13 +84,15 @@ export const CartDelivery = ({ onBack }: CartDeliveryProps) => {
       router.push("/account/login");
     } else {
       try {
-        await checkout({
+        const response = await checkout({
           deliveryDate: formattedDate,
           deliveryTime: time,
           phone: phone,
         });
-
-        router.replace("/checkout/success");
+        if (response) {
+          triggerCloseAnimation();
+          router.replace("/checkout/success");
+        }
       } catch (error) {
         console.error(error);
       }
