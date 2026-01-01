@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-image: url("https://cdn.shopify.com/oxygen-v2/35730/26390/54938/2685387/img/bg/img_bg-web.webp");
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
+@layer base {
+  :root {
+    /* (#FFFFFF) */
+    --background: 0 0% 100%;
+    
+    /* (#211D1F) */
+    --foreground: 330 6.5% 12.2%;
+
+    /*  (#3F4B1F) */
+    --primary: 76.4 41.5% 20.8%;
+    --primary-foreground: 0 0% 100%;
+
+    /* (#2F3915) */
+    --secondary: 76.7 46.2% 15.3%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* (#661419) */
+    --destructive: 356.3 67.2% 23.9%;
+    --destructive-foreground: 0 0% 100%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 330 6.5% 12.2%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 330 6.5% 12.2%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 76.4 41.5% 96%; 
+    --accent-foreground: 330 6.5% 12.2%;
+
+    --border: 330 6.5% 12.2%;
+    --input: 330 6.5% 12.2%;
+    
+    --ring: 76.4 41.5% 20.8%;
+
+    --radius: 0rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border/15;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .bg-union-paper {
+    background-image: url("https://cdn.shopify.com/oxygen-v2/35730/26390/54938/2685387/img/bg/img_bg-web.webp");
+    background-repeat: repeat;
+  }
+}
+
+body {
+  @apply bg-union-paper bg-fixed;
+}
