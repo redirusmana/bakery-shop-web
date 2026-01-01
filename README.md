@@ -1,4 +1,4 @@
-# Union Bakery - Frontend E-Commerce
+# Union Bakery
 
 A modern, responsive e-commerce application designed for **Union Bakery**. Built with **Next.js (App Router)** and **TypeScript**, focusing on a seamless user experience, robust state management, and a clean, minimalist aesthetic.
 
@@ -49,7 +49,7 @@ Follow these steps to run the project locally.
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/username/union-bakery.git](https://github.com/username/union-bakery.git)
+   git clone https://github.com/redirusmana/bakery-shop-web
    cd union-bakery
    ```
 
@@ -64,7 +64,7 @@ Follow these steps to run the project locally.
 3. **Environment Variables**
 Create a `.env.local` file in the root directory and add your API endpoint:
    ```env
-   NEXT_PUBLIC_API_URL=[https://api.your-backend.com/v1](https://api.your-backend.com/v1)
+   NEXT_PUBLIC_API_URL=https://api.your-backend.com/v1
 
    ```
 
@@ -73,7 +73,7 @@ Create a `.env.local` file in the root directory and add your API endpoint:
    npm run dev
    ```
 
-5. Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) with your browser.
+5. Open http://localhost:3000
 
 ## 📂 Project Structure
 
